@@ -5,18 +5,21 @@ from airtest.core.api import *
 
 from settings import settings, logger
 
+_PATH = "static/template/material"
+
 
 class _Elements(BaseModel):
     """图像模版"""
-    entry_tpl = Template(settings.ROOT.joinpath("static/template/material", "material_icon.png"))
-    wheel_tpl = Template(settings.ROOT.joinpath("static/template/material", "wheel_material.png"))
-    symbol_tpl = Template(settings.ROOT.joinpath("static/template/material", "symbol_material.png"))
-    carp_tpl = Template(settings.ROOT.joinpath("static/template/material", "carp_material.png"))
-    drum_tpl = Template(settings.ROOT.joinpath("static/template/material", "drum_material.png"))
-    fight_tpl = Template(settings.ROOT.joinpath("static/template/material", "fight_icon.png"))
-    prepare_tpl = Template(settings.ROOT.joinpath("static/template/material", "prepare_icon.png"))
-    reward_tpl = Template(settings.ROOT.joinpath("static/template/material", "reward_icon.png"))
-    back_tpl = Template(settings.ROOT.joinpath("static/template/material", "back_icon.png"))
+
+    entry_tpl = Template(settings.ROOT.joinpath(_PATH, "material_icon.png"))
+    wheel_tpl = Template(settings.ROOT.joinpath(_PATH, "wheel_material.png"))
+    symbol_tpl = Template(settings.ROOT.joinpath(_PATH, "symbol_material.png"))
+    carp_tpl = Template(settings.ROOT.joinpath(_PATH, "carp_material.png"))
+    drum_tpl = Template(settings.ROOT.joinpath(_PATH, "drum_material.png"))
+    fight_tpl = Template(settings.ROOT.joinpath(_PATH, "fight_icon.png"))
+    prepare_tpl = Template(settings.ROOT.joinpath(_PATH, "prepare_icon.png"))
+    reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon.png"))
+    back_tpl = Template(settings.ROOT.joinpath(_PATH, "back_icon.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -24,6 +27,7 @@ class _Elements(BaseModel):
 
 class MaterialPage:
     """觉醒材料"""
+
     _elements = _Elements()
 
     def enter_material(self):

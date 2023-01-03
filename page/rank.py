@@ -3,19 +3,24 @@ from pydantic.main import BaseModel
 
 from settings import settings, logger
 
+_PATH = "static/template/rank"
+
 
 class _Elements(BaseModel):
     """图像模版"""
-    rank_tpl = Template(settings.ROOT.joinpath("static/template/rank", "rank_icon.png"))
-    fight_tpl = Template(settings.ROOT.joinpath("static/template/rank", "fight_icon.png"))
-    fight_protect_tpl = Template(settings.ROOT.joinpath("static/template/rank", "fight_protect_icon.png"))
-    prepare_tpl = Template(settings.ROOT.joinpath("static/template/rank", "prepare_icon.png"))
-    manual_tpl = Template(settings.ROOT.joinpath("static/template/rank", "manual_icon.png"))
-    complete_tpl = Template(settings.ROOT.joinpath("static/template/rank", "complete1_icon.png"))
-    back_tpl = Template(settings.ROOT.joinpath("static/template/rank", "back_icon.png"))
-    confirm_tpl = Template(settings.ROOT.joinpath("static/template/rank", "confirm_icon.png"))
-    reward_tpl = Template(settings.ROOT.joinpath("static/template/rank", "reward_icon.png"))
-    quit_tpl = Template(settings.ROOT.joinpath("static/template/rank", "quit_icon.png"))
+
+    rank_tpl = Template(settings.ROOT.joinpath(_PATH, "rank_icon.png"))
+    fight_tpl = Template(settings.ROOT.joinpath(_PATH, "fight_icon.png"))
+    fight_protect_tpl = Template(
+        settings.ROOT.joinpath(_PATH, "fight_protect_icon.png")
+    )
+    prepare_tpl = Template(settings.ROOT.joinpath(_PATH, "prepare_icon.png"))
+    manual_tpl = Template(settings.ROOT.joinpath(_PATH, "manual_icon.png"))
+    complete_tpl = Template(settings.ROOT.joinpath(_PATH, "complete1_icon.png"))
+    back_tpl = Template(settings.ROOT.joinpath(_PATH, "back_icon.png"))
+    confirm_tpl = Template(settings.ROOT.joinpath(_PATH, "confirm_icon.png"))
+    reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon.png"))
+    quit_tpl = Template(settings.ROOT.joinpath(_PATH, "quit_icon.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -23,13 +28,17 @@ class _Elements(BaseModel):
 
 class RankPage:
     """斗技"""
+
     _elements = _Elements()
 
     def start_rank(self, times: int = 10):
         """开启斗技
         :type times: rank次数
         """
-        logger.info("进入斗技场馆"), click(self._elements.rank_tpl)
+        if exists(self._elements.rank_tpl):
+            logger.info("进入斗技场馆"), click(self._elements.rank_tpl)
+        else:
+            logger.info("已在斗技场馆")
         while times > 0:
             if exists(self._elements.fight_tpl):
                 logger.info("进行战斗匹配"), click(self._elements.fight_tpl)

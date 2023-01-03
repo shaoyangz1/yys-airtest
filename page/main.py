@@ -3,11 +3,14 @@ from airtest.core.api import *
 
 from settings import settings, logger
 
+_PATH = "static/template/main"
+
 
 class _Elements(BaseModel):
     """图像模版"""
-    activity_tpl = Template(settings.ROOT.joinpath("static/template/main", "activity_icon.png"))
-    search_tpl = Template(settings.ROOT.joinpath("static/template/main", "search_icon.png"))
+
+    activity_tpl = Template(settings.ROOT.joinpath(_PATH, "activity_icon.png"))
+    search_tpl = Template(settings.ROOT.joinpath(_PATH, "search_icon.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -15,6 +18,7 @@ class _Elements(BaseModel):
 
 class MainPage:
     """首页"""
+
     _elements = _Elements()
 
     def enter_activity(self):

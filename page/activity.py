@@ -3,12 +3,15 @@ from pydantic.main import BaseModel
 
 from settings import settings, logger
 
+_PATH = "static/template/activity"
+
 
 class _Elements(BaseModel):
     """图像模版"""
-    battle_tpl = Template(settings.ROOT.joinpath("static/template/activity", "battle1_icon.png"))
-    complete_tpl = Template(settings.ROOT.joinpath("static/template/activity", "complete1_icon.png"))
-    reward_tpl = Template(settings.ROOT.joinpath("static/template/activity", "reward_icon.png"))
+
+    battle_tpl = Template(settings.ROOT.joinpath(_PATH, "battle1_icon.png"))
+    complete_tpl = Template(settings.ROOT.joinpath(_PATH, "complete1_icon.png"))
+    reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon.png"))
 
     class Config:
         arbitrary_types_allowed = True

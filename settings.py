@@ -1,16 +1,18 @@
-from pathlib import Path
+from pathlib import Path, PosixPath
 
 import loguru
 from pydantic import BaseSettings, Field
 
+_ROOT = Path(__file__).parent
+
 
 class Settings(BaseSettings):
-    ROOT: Path = Path(__file__).parent
+    ROOT: PosixPath = _ROOT
     UUID: str = Field(..., env="UUID")
     LOGLEVEL: str = "INFO"
 
     class Config:
-        env_file = ".env"
+        env_file = _ROOT.joinpath(".env")
 
 
 logger = loguru.logger

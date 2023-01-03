@@ -1,22 +1,18 @@
 [project]
-name = ""
-version = ""
-description = ""
+name = "yys"
+version = "1.0.0"
+description = "yys"
 authors = [
-    {name = "shaoyangzi", email = "shaoyangzi@xd.com"},
+    { name = "shaoyangzi", email = "shaoyangz1@163.com" },
 ]
 dependencies = [
     "airtest>=1.2.7",
-    "pydantic[dotenv]>=1.10.2",
     "loguru>=0.6.0",
-    "black>=22.10.0",
+    "black>=22.12.0",
+    "pydantic[dotenv]>=1.10.3",
 ]
-requires-python = ">=3.9"
-license = {text = "MIT"}
-
-[build-system]
-requires = ["pdm-pep517>=1.0.0"]
-build-backend = "pdm.pep517.api"
+requires-python = ">=3.9,<3.10"
+license = { text = "MIT" }
 
 [tool.pdm]
 [tool.pdm.scripts]

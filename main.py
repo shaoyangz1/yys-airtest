@@ -27,7 +27,7 @@ def soul1_member():
 def soul2():
     """业原火"""
     page = SoulPage()
-    page.start_soul2(times=100)
+    page.start_soul2(times=70)
 
 
 def rank():
@@ -51,8 +51,13 @@ def activity():
     page.start_activity(times=30)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--type", help="soul||rank||material||activity", type=str, default="soul")
+    parser.add_argument(
+        "--type",
+        help="soul||rank||material||activity",
+        type=str,
+        default="soul",
+    )
     args = parser.parse_args()
     globals()[args.type]()

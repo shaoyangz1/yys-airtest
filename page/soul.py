@@ -5,16 +5,19 @@ from airtest.core.api import *
 
 from settings import settings, logger
 
+_PATH = "static/template/soul"
+
 
 class _Elements(BaseModel):
     """首页元素"""
-    entry_tpl = Template(settings.ROOT.joinpath("static/template/soul", "soul_icon.png"))
-    prepare_tpl = Template(settings.ROOT.joinpath("static/template/soul", "prepare_icon.png"))
-    battle1_tpl = Template(settings.ROOT.joinpath("static/template/soul", "battle2_icon.png"))
-    complete1_tpl = Template(settings.ROOT.joinpath("static/template/soul", "complete2_icon.png"))
-    reward_tpl = Template(settings.ROOT.joinpath("static/template/soul", "reward_icon.png"))
-    battle2_tpl = Template(settings.ROOT.joinpath("static/template/soul", "battle2_icon.png"))
-    complete2_tpl = Template(settings.ROOT.joinpath("static/template/soul", "complete2_icon.png"))
+
+    entry_tpl = Template(settings.ROOT.joinpath(_PATH, "soul_icon.png"))
+    prepare_tpl = Template(settings.ROOT.joinpath(_PATH, "prepare_icon.png"))
+    battle1_tpl = Template(settings.ROOT.joinpath(_PATH, "battle2_icon.png"))
+    complete1_tpl = Template(settings.ROOT.joinpath(_PATH, "complete2_icon.png"))
+    reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon.png"))
+    battle2_tpl = Template(settings.ROOT.joinpath(_PATH, "battle2_icon.png"))
+    complete2_tpl = Template(settings.ROOT.joinpath(_PATH, "complete2_icon.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -22,6 +25,7 @@ class _Elements(BaseModel):
 
 class SoulPage:
     """御魂"""
+
     _elements = _Elements()
 
     def enter_soul(self):
@@ -69,7 +73,7 @@ class SoulPage:
                 logger.info("点击准备"), click(self._elements.prepare_tpl)
             logger.info("准备完毕开始战斗"), time.sleep(60)
             wait(self._elements.complete2_tpl, timeout=120)
-            logger.info("战斗结束"), click(self._elements.complete2_tpl)
+            logger.info("业原火战斗结束"), click(self._elements.complete2_tpl)
             wait(self._elements.reward_tpl, timeout=30)
             time.sleep(3)
             logger.info("领取奖励"), click(self._elements.reward_tpl)
