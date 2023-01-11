@@ -23,7 +23,9 @@ class WardPage:
     def __init__(self):
         self._elements = _Elements()
         self.battle = BattlePage()
-        self.ward_list = [i for i in itertools.product([700, 1200, 1700], [300, 500, 700])]
+        self.ward_list = [
+            i for i in itertools.product([700, 1200, 1700], [300, 500, 700])
+        ]
 
     def enter_ward(self):
         """进入结界"""
