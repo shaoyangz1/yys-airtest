@@ -2,9 +2,10 @@ import argparse
 
 from airtest.core.api import *
 from airtest.utils.logger import get_logger
-from page import SoulPage, RankPage
-from page.activity import ActivityPage
+
+from page import SpiritPage, RankPage
 from page.material import MaterialPage
+from page.ward import WardPage
 from settings import settings
 
 logger = get_logger("airtest")
@@ -12,22 +13,28 @@ logger.setLevel(settings.LOGLEVEL)  # airtest日志级别
 init_device(platform="Android", uuid=settings.UUID)
 
 
-def soul1_team():
+def spirit1_team():
     """御魂"""
-    page = SoulPage()
-    page.start_soul1_team(times=100)
+    page = SpiritPage()
+    page.start_spirit1_team(times=10000)
 
 
-def soul1_member():
+def spirit1_member():
     """御魂"""
-    page = SoulPage()
-    page.start_soul1_team(times=100)
+    page = SpiritPage()
+    page.start_spirit1_member(times=10000)
 
 
-def soul2():
+def spirit2():
     """业原火"""
-    page = SoulPage()
-    page.start_soul2(times=70)
+    page = SpiritPage()
+    page.start_spirit_by_type(s_type=2, times=70)
+
+
+def spirit3():
+    """日冕之轮"""
+    page = SpiritPage()
+    page.start_spirit_by_type(s_type=3, times=70)
 
 
 def rank():
@@ -39,25 +46,28 @@ def rank():
 def material():
     """觉醒材料"""
     page = MaterialPage()
-    for m_type in [2]:  # 改类型
+    times = 1  # 改次数
+    for m_type in [1, 2, 3, 4]:  # 改类型
         page.enter_material()
-        page.collect_material(m_type=m_type, times=10)  # 改次数
+        page.select_material(m_type=m_type)
+        page.collect_material(times=times)
+        time.sleep(2)  # 过度动画
         page.quit_material()
 
 
-def activity():
-    """活动"""
-    page = ActivityPage()
-    page.start_activity(times=30)
+def ward():
+    """结界突破"""
+    page = WardPage()
+    page.surrender_wards(nums=9)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--type",
-        help="soul||rank||material||activity",
+        help="spirit||rank||material",
         type=str,
-        default="soul",
+        default="spirit",
     )
     args = parser.parse_args()
     globals()[args.type]()

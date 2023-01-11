@@ -20,6 +20,7 @@ class _Elements(BaseModel):
     prepare_tpl = Template(settings.ROOT.joinpath(_PATH, "prepare_icon.png"))
     reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon.png"))
     back_tpl = Template(settings.ROOT.joinpath(_PATH, "back_icon.png"))
+    level_ten_tpl = Template(settings.ROOT.joinpath(_PATH, "level_ten.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -32,29 +33,34 @@ class MaterialPage:
 
     def enter_material(self):
         """进入觉醒材料"""
-        logger.info("进入觉醒材料"), click(self._elements.entry_tpl)
+        logger.info("进入觉醒材料"), touch(self._elements.entry_tpl)
 
     def quit_material(self):
         """退出觉醒材料"""
         logger.info("退出觉醒材料"), click(self._elements.back_tpl)
 
-    def collect_material(self, m_type: int, times: int = 10):
+    def select_material(self, m_type: int = Literal[1, 2, 3, 4]):
+        """选择觉醒材料"""
+        if m_type == 1:
+            logger.info("选择挑战火麒麟"), click(self._elements.wheel_tpl)
+        elif m_type == 2:
+            logger.info("选择挑战风麒麟"), click(self._elements.symbol_tpl)
+        elif m_type == 3:
+            logger.info("选择挑战水麒麟"), click(self._elements.carp_tpl)
+        else:
+            logger.info("选择挑战雷麒麟"), click(self._elements.drum_tpl)
+        logger.info("滑动层数"), swipe((300, 900), (300, 200))
+        time.sleep(1)  # 过度动画
+        logger.info("选择挑战十层"), click(self._elements.level_ten_tpl)
+
+    def collect_material(self, times: int = 10):
         """
         收集觉醒材料
-        :param m_type: 材料类型： 1，2，3，4
         :param times: 挑战次数
         """
         while times > 0:
-            if m_type == 1:
-                logger.info("挑战火麒麟"), click(self._elements.wheel_tpl)
-            elif m_type == 2:
-                logger.info("挑战风麒麟"), click(self._elements.symbol_tpl)
-            elif m_type == 3:
-                logger.info("挑战水麒麟"), click(self._elements.carp_tpl)
-            else:
-                logger.info("挑战雷麒麟"), click(self._elements.drum_tpl)
             logger.info("开始挑战"), click(self._elements.fight_tpl)
-            time.sleep(2)  # 过度动画
+            time.sleep(5)  # 过度动画
             if exists(self._elements.prepare_tpl):
                 logger.info("点击准备"), click(self._elements.prepare_tpl)
             count = 60

@@ -11,12 +11,11 @@ class _Elements(BaseModel):
 
     rank_tpl = Template(settings.ROOT.joinpath(_PATH, "rank_icon.png"))
     fight_tpl = Template(settings.ROOT.joinpath(_PATH, "fight_icon.png"))
-    fight_protect_tpl = Template(
-        settings.ROOT.joinpath(_PATH, "fight_protect_icon.png")
-    )
+    fight1_tpl = Template(settings.ROOT.joinpath(_PATH, "fight1_icon.png"))
     prepare_tpl = Template(settings.ROOT.joinpath(_PATH, "prepare_icon.png"))
+    team_auto_tpl = Template(settings.ROOT.joinpath(_PATH, "team_auto.png"))
     manual_tpl = Template(settings.ROOT.joinpath(_PATH, "manual_icon.png"))
-    complete_tpl = Template(settings.ROOT.joinpath(_PATH, "complete1_icon.png"))
+    complete_tpl = Template(settings.ROOT.joinpath(_PATH, "complete_icon.png"))
     back_tpl = Template(settings.ROOT.joinpath(_PATH, "back_icon.png"))
     confirm_tpl = Template(settings.ROOT.joinpath(_PATH, "confirm_icon.png"))
     reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon.png"))
@@ -35,27 +34,22 @@ class RankPage:
         """开启斗技
         :type times: rank次数
         """
-        if exists(self._elements.rank_tpl):
-            logger.info("进入斗技场馆"), click(self._elements.rank_tpl)
-        else:
-            logger.info("已在斗技场馆")
         while times > 0:
             if exists(self._elements.fight_tpl):
                 logger.info("进行战斗匹配"), click(self._elements.fight_tpl)
-            elif exists(self._elements.fight_protect_tpl):
-                logger.info("进行战斗匹配"), click(self._elements.fight_protect_tpl)
+            elif exists(self._elements.fight1_tpl):
+                logger.info("进行战斗匹配"), click(self._elements.fight1_tpl)
             else:
                 logger.error("无法开启战斗")
                 return
             try:
-                wait(self._elements.prepare_tpl, timeout=30)
-                logger.info("准备战斗"), click(self._elements.prepare_tpl)
-                time.sleep(10)
-                if exists(self._elements.manual_tpl):
-                    time.sleep(3)
-                    logger.info("切换自动战斗"), click(self._elements.manual_tpl)
+                time.sleep(5)  # 动画过渡
+                if exists(self._elements.team_auto_tpl):
+                    logger.error("自动上阵"), click(self._elements.team_auto_tpl)
                 else:
-                    logger.info("正在自动战斗")
+                    wait(self._elements.prepare_tpl, timeout=30)
+                    logger.info("准备战斗"), click(self._elements.prepare_tpl)
+                time.sleep(10)
                 count = 60
                 while count > 0:
                     #  战斗180s 没结束就投降
@@ -75,8 +69,8 @@ class RankPage:
                     logger.info("战斗结束"), click(self._elements.complete_tpl)
             finally:
                 #  检测一下有没有奖励
+                time.sleep(5)  # 动画过渡
                 if exists(self._elements.reward_tpl):
                     logger.info("奖励领取"), click(self._elements.reward_tpl)
-                    click(self._elements.fight_tpl)  # 领取奖励完再点击一下关闭奖励
+                    click(self._elements.reward_tpl)  # 领取奖励完再点击一下关闭奖励
             times -= 1
-        logger.info("离开斗技场馆"), click(self._elements.quit_tpl)
