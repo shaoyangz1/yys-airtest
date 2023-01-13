@@ -79,7 +79,7 @@ class SpiritPage:
             else:
                 logger.info("挑战日轮之陨"), touch(self._elements.type3_tpl)
                 touch(self._elements.battle3_tpl)
-            time.sleep(1000)
+            time.sleep(10)
             if exists(self._elements.prepare_tpl):
                 logger.info("点击准备"), touch(self._elements.prepare_tpl)
             logger.info("准备完毕开始战斗"), time.sleep(60)
