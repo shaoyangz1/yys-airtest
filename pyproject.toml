@@ -1,12 +1,12 @@
 [project]
-name = "yys"
-version = "1.0.0"
-description = "yys"
+name = ""
+version = ""
+description = ""
 authors = [
     { name = "shaoyangzi", email = "shaoyangz1@163.com" },
 ]
 dependencies = [
-    "airtest>=1.2.7",
+    "airtest>=1.2.9",
     "loguru>=0.6.0",
     "black>=22.12.0",
     "pydantic[dotenv]>=1.10.3",

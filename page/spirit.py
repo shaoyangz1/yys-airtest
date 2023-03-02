@@ -20,6 +20,7 @@ class _Elements(BaseModel):
     complete2_tpl = Template(settings.ROOT.joinpath(_PATH, "complete2_icon.png"))
     battle3_tpl = Template(settings.ROOT.joinpath(_PATH, "battle3_icon.png"))
     type3_tpl = Template(settings.ROOT.joinpath(_PATH, "battle3_type.png"))
+    battle4_tpl = Template(settings.ROOT.joinpath(_PATH, "battle4_icon.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -67,7 +68,7 @@ class SpiritPage:
             times -= 1
             time.sleep(2)
 
-    def start_spirit_by_type(self, s_type: int = Literal[2, 3], times: int = 10):
+    def start_spirit_by_type(self, s_type: int = Literal[2, 3, 4], times: int = 10):
         """御魂挑战
         :type s_type: 御魂类型
         :type times: 挑战次数
@@ -87,6 +88,17 @@ class SpiritPage:
             logger.info("战斗结束"), touch(self._elements.complete2_tpl)
             wait(self._elements.reward_tpl, timeout=30)
             time.sleep(3)
+            logger.info("领取奖励"), touch(self._elements.reward_tpl)
+            times -= 1
+            time.sleep(2)
+
+    def sprite_fight(self, times: int = 10):
+        """御灵"""
+        while times > 0:
+            touch(self._elements.battle3_tpl)
+            logger.info("准备完毕开始战斗"), time.sleep(60)
+            wait(self._elements.reward_tpl, timeout=60)
+            time.sleep(5)
             logger.info("领取奖励"), touch(self._elements.reward_tpl)
             times -= 1
             time.sleep(2)

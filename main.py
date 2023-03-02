@@ -34,7 +34,7 @@ def spirit2():
 def spirit3():
     """日冕之轮"""
     page = SpiritPage()
-    page.start_spirit_by_type(s_type=3, times=70)
+    page.start_spirit_by_type(s_type=3, times=40)
 
 
 def rank():
@@ -46,7 +46,7 @@ def rank():
 def material():
     """觉醒材料"""
     page = MaterialPage()
-    times = 1  # 改次数
+    times = 30  # 改次数
     for m_type in [1, 2, 3, 4]:  # 改类型
         page.enter_material()
         page.select_material(m_type=m_type)
@@ -59,6 +59,11 @@ def ward():
     """结界突破"""
     page = WardPage()
     page.surrender_wards(nums=9)
+
+
+def sprite():
+    page = SpiritPage()
+    page.sprite_fight(times=50)
 
 
 if __name__ == "__main__":
