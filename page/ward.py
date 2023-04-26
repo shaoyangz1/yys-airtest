@@ -24,7 +24,7 @@ class WardPage:
         self._elements = _Elements()
         self.battle = BattlePage()
         self.ward_list = [
-            i for i in itertools.product([700, 1200, 1700], [300, 500, 700])
+            i for i in itertools.product([400, 800, 1200], [300, 450, 600])
         ]
 
     def enter_ward(self):
@@ -40,7 +40,7 @@ class WardPage:
         :param nums: 投降个数
         """
         for ward in self.ward_list[:nums]:
-            logger.info("选择结界"), click(ward)
+            logger.info(f"选择结界{ward}"), click(ward)
             logger.info("结界进攻"), click(self._elements.attack_tpl)
             time.sleep(3)  # 动画过度
             logger.info("点击投降"), self.battle.quit_battle()

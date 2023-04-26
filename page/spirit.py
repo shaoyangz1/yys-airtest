@@ -60,10 +60,11 @@ class SpiritPage:
         while times > 0:
             logger.info("挑战魂土")
             time.sleep(10)
-            wait(self._elements.complete1_tpl, timeout=50)
-            logger.info("战斗结束"), touch(self._elements.complete1_tpl)
+            # wait(self._elements.complete1_tpl, timeout=50)
+            # logger.info("战斗结束"), touch(self._elements.complete1_tpl)
             wait(self._elements.reward_tpl, timeout=50)
             time.sleep(3)
+            logger.info("领取奖励"), touch(self._elements.reward_tpl)
             logger.info("领取奖励"), touch(self._elements.reward_tpl)
             times -= 1
             time.sleep(2)
@@ -83,7 +84,7 @@ class SpiritPage:
             time.sleep(10)
             if exists(self._elements.prepare_tpl):
                 logger.info("点击准备"), touch(self._elements.prepare_tpl)
-            logger.info("准备完毕开始战斗"), time.sleep(60)
+            logger.info("准备完毕开始战斗"), time.sleep(10)
             wait(self._elements.complete2_tpl, timeout=120)
             logger.info("战斗结束"), touch(self._elements.complete2_tpl)
             wait(self._elements.reward_tpl, timeout=30)

@@ -10,7 +10,7 @@ from settings import settings
 
 logger = get_logger("airtest")
 logger.setLevel(settings.LOGLEVEL)  # airtest日志级别
-init_device(platform="Android", uuid=settings.UUID)
+# init_device(platform="Android", uuid=settings.UUID)
 
 
 def spirit1_team():
@@ -32,9 +32,9 @@ def spirit2():
 
 
 def spirit3():
-    """日冕之轮"""
+    """日轮之陨"""
     page = SpiritPage()
-    page.start_spirit_by_type(s_type=3, times=40)
+    page.start_spirit_by_type(s_type=3, times=50)
 
 
 def rank():
@@ -74,5 +74,12 @@ if __name__ == "__main__":
         type=str,
         default="spirit",
     )
+    parser.add_argument(
+        "--device",
+        help="uuid",
+        type=str,
+        default="127.0.0.1:62001",
+    )
     args = parser.parse_args()
+    init_device(platform="Android", uuid=args.device)
     globals()[args.type]()
