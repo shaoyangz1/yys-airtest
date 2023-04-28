@@ -3,14 +3,13 @@ import argparse
 from airtest.core.api import *
 from airtest.utils.logger import get_logger
 
-from page import SpiritPage, RankPage
+from page import SpiritPage, RankPage, ActivityPage
 from page.material import MaterialPage
 from page.ward import WardPage
 from settings import settings
 
 logger = get_logger("airtest")
 logger.setLevel(settings.LOGLEVEL)  # airtest日志级别
-# init_device(platform="Android", uuid=settings.UUID)
 
 
 def spirit1_team():
@@ -43,6 +42,12 @@ def rank():
     page.start_rank(times=30)
 
 
+def activity():
+    """限时活动"""
+    page = ActivityPage()
+    page.start(times=300)
+
+
 def material():
     """觉醒材料"""
     page = MaterialPage()
@@ -72,7 +77,7 @@ if __name__ == "__main__":
         "--type",
         help="spirit||rank||material",
         type=str,
-        default="spirit",
+        default="activity",
     )
     parser.add_argument(
         "--device",
