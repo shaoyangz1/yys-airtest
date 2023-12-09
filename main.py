@@ -12,14 +12,20 @@ logger = get_logger("airtest")
 logger.setLevel(settings.LOGLEVEL)  # airtest日志级别
 
 
+def spirit_solo():
+    """御魂单人"""
+    page = SpiritPage()
+    page.start_spirit_solo(times=118)
+
+
 def spirit1_team():
-    """御魂"""
+    """御魂队长"""
     page = SpiritPage()
     page.start_spirit1_team(times=10000)
 
 
 def spirit1_member():
-    """御魂"""
+    """御魂队友"""
     page = SpiritPage()
     page.start_spirit1_member(times=10000)
 
@@ -27,7 +33,7 @@ def spirit1_member():
 def spirit2():
     """业原火"""
     page = SpiritPage()
-    page.start_spirit_by_type(s_type=2, times=70)
+    page.start_spirit_by_type(s_type=2, times=50)
 
 
 def spirit3():
@@ -45,14 +51,14 @@ def rank():
 def activity():
     """限时活动"""
     page = ActivityPage()
-    page.start(times=300)
+    page.start(times=1000)
 
 
 def material():
     """觉醒材料"""
     page = MaterialPage()
-    times = 30  # 改次数
-    for m_type in [1, 2, 3, 4]:  # 改类型
+    times = 50  # 改次数
+    for m_type in [3, 4]:  # 改类型
         page.enter_material()
         page.select_material(m_type=m_type)
         page.collect_material(times=times)
@@ -67,8 +73,9 @@ def ward():
 
 
 def sprite():
+    """御灵"""
     page = SpiritPage()
-    page.sprite_fight(times=50)
+    page.sprite_fight(times=69)
 
 
 if __name__ == "__main__":
@@ -77,13 +84,13 @@ if __name__ == "__main__":
         "--type",
         help="spirit||rank||material",
         type=str,
-        default="activity",
+        default="spirit3",
     )
     parser.add_argument(
         "--device",
         help="uuid",
-        type=str,
-        default="127.0.0.1:62001",
+        type=str, 
+        default="127.0.0.1:16384",
     )
     args = parser.parse_args()
     init_device(platform="Android", uuid=args.device)

@@ -11,6 +11,7 @@ class _Elements(BaseModel):
 
     challenge_tpl = Template(settings.ROOT.joinpath(_PATH, "challenge.png"))
     reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward.png"))
+    continue_tpl = Template(settings.ROOT.joinpath(_PATH, "continue.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -21,11 +22,12 @@ class ActivityPage:
         self._elements = _Elements()
 
     def start(self, times: int = 100):
-        while times > 0:
+        count = 0
+        while count < times:
+            count += 1
             touch(self._elements.challenge_tpl)
-            logger.info("开始挑战"), time.sleep(10)
-            wait(self._elements.reward_tpl, timeout=20)
-            time.sleep(2)
+            logger.info(f"开始第{count}次挑战"), time.sleep(5)
+            wait(self._elements.reward_tpl, timeout=30)
+            time.sleep(.5)
             logger.info("领取奖励"), touch(self._elements.reward_tpl)
-            times -= 1
-            time.sleep(2)
+            time.sleep(1)

@@ -12,6 +12,7 @@ class _Elements(BaseModel):
 
     entry_tpl = Template(settings.ROOT.joinpath(_PATH, "soul_icon.png"))
     prepare_tpl = Template(settings.ROOT.joinpath(_PATH, "prepare_icon.png"))
+    solo_tpl = Template(settings.ROOT.joinpath(_PATH, "solo_icon.png"))
     battle1_tpl = Template(settings.ROOT.joinpath(_PATH, "battle1_icon.png"))
     complete1_tpl = Template(settings.ROOT.joinpath(_PATH, "complete1_icon.png"))
     reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon1.png"))
@@ -35,6 +36,18 @@ class SpiritPage:
     def enter_spirit(self):
         """进入御魂界面"""
         touch(self._elements.entry_tpl)
+
+    def start_spirit_solo(self, times: int = 100):
+        count = 0
+        while count < times:
+            count += 1
+            logger.info(f"第{count}次挑战魂土"), touch(self._elements.solo_tpl)
+            logger.info("挑战魂土"), time.sleep(15)
+            wait(self._elements.complete1_tpl, timeout=50)
+            logger.info("战斗结束"), touch(self._elements.complete1_tpl)
+            wait(self._elements.reward_tpl, timeout=30)
+            time.sleep(.5)
+            logger.info("领取奖励"), touch(self._elements.reward_tpl)
 
     def start_spirit1_team(self, times: int = 100):
         """御魂挑战 1 八岐大蛇
