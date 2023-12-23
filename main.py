@@ -15,31 +15,31 @@ logger.setLevel(settings.LOGLEVEL)  # airtest日志级别
 def spirit_solo():
     """御魂单人"""
     page = SpiritPage()
-    page.start_spirit_solo(times=118)
+    page.spirit1_solo(times=73)
 
 
 def spirit1_team():
     """御魂队长"""
     page = SpiritPage()
-    page.start_spirit1_team(times=10000)
+    page.spirit1_team(times=10000)
 
 
 def spirit1_member():
     """御魂队友"""
     page = SpiritPage()
-    page.start_spirit1_member(times=10000)
+    page.spirit1_member(times=10000)
 
 
 def spirit2():
     """业原火"""
     page = SpiritPage()
-    page.start_spirit_by_type(s_type=2, times=50)
+    page.spirit_by_type(s_type=2, times=50)
 
 
 def spirit3():
     """日轮之陨"""
     page = SpiritPage()
-    page.start_spirit_by_type(s_type=3, times=50)
+    page.spirit_by_type(s_type=3, times=49)
 
 
 def rank():
@@ -58,7 +58,7 @@ def material():
     """觉醒材料"""
     page = MaterialPage()
     times = 50  # 改次数
-    for m_type in [3, 4]:  # 改类型
+    for m_type in [1, 2, 3, 4]:  # 改类型
         page.enter_material()
         page.select_material(m_type=m_type)
         page.collect_material(times=times)
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         "--device",
         help="uuid",
         type=str, 
-        default="127.0.0.1:16384",
+        default="YSE0222408015005",
     )
     args = parser.parse_args()
     init_device(platform="Android", uuid=args.device)

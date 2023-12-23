@@ -15,6 +15,7 @@ class _Elements(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
+        ignored_types = (Template,)
 
 
 class ActivityPage:
@@ -28,6 +29,6 @@ class ActivityPage:
             touch(self._elements.challenge_tpl)
             logger.info(f"开始第{count}次挑战"), time.sleep(5)
             wait(self._elements.reward_tpl, timeout=30)
-            time.sleep(.5)
+            time.sleep(0.5)
             logger.info("领取奖励"), touch(self._elements.reward_tpl)
             time.sleep(1)

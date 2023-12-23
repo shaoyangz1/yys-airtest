@@ -1,7 +1,7 @@
 from pathlib import Path, PosixPath
 
 import loguru
-from pydantic import BaseSettings, Field
+from pydantic.v1 import BaseSettings, Field
 
 _ROOT = Path(__file__).parent
 

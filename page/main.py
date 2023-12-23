@@ -14,6 +14,7 @@ class _Elements(BaseModel):
 
     class Config:
         arbitrary_types_allowed = True
+        ignored_types = (Template,)
 
 
 class MainPage:
