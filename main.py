@@ -15,7 +15,7 @@ logger.setLevel(settings.LOGLEVEL)  # airtest日志级别
 def spirit_solo():
     """御魂单人"""
     page = SpiritPage()
-    page.spirit1_solo(times=73)
+    page.spirit1_solo(times=120)
 
 
 def spirit1_team():
@@ -90,7 +90,7 @@ if __name__ == "__main__":
         "--device",
         help="uuid",
         type=str, 
-        default="YSE0222408015005",
+        default=settings.UUID,
     )
     args = parser.parse_args()
     init_device(platform="Android", uuid=args.device)

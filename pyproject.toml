@@ -6,10 +6,12 @@ authors = [
     { name = "shaoyangzi", email = "shaoyangz1@163.com" },
 ]
 dependencies = [
-    "airtest>=1.2.9",
-    "loguru>=0.6.0",
-    "black>=22.12.0",
-    "pydantic[dotenv]>=1.10.3",
+    "airtest>=1.3.2",
+    "loguru>=0.7.2",
+    "black>=23.12.1",
+    "pydantic>=2.5.3",
+    "pydantic-settings>=2.1.0",
+    "python-dotenv>=1.0.0",
 ]
 requires-python = ">=3.9,<3.10"
 license = { text = "MIT" }

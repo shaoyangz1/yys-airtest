@@ -88,7 +88,7 @@ class SpiritPage:
                 logger.info(f"第{count}次挑战日轮之陨"), touch(self._elements.type3_tpl)
                 touch(self._elements.battle3_tpl)
             logger.info("开始战斗"), time.sleep(10)
-            wait(self._elements.complete2_tpl, timeout=120)
+            logger.info("等待战斗结束"), wait(self._elements.complete2_tpl, timeout=20)
             logger.info("战斗结束"), touch(self._elements.complete2_tpl)
             wait(self._elements.reward_tpl, timeout=30)
             logger.info("等待奖励刷新"), time.sleep(1)

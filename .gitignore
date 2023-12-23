@@ -1,3 +1,3 @@
 .venv
 .pdm-python
-.env
+env.toml
