@@ -5,22 +5,22 @@ from airtest.core.api import *
 
 from settings import settings, logger
 
-_PATH = "static/template/material"
+_PATH = settings.ROOT.joinpath("static/template/material")
 
 
 class _Elements(BaseModel):
     """图像模版"""
 
-    entry_tpl = Template(settings.ROOT.joinpath(_PATH, "material_icon.png"))
-    wheel_tpl = Template(settings.ROOT.joinpath(_PATH, "wheel_material.png"))
-    symbol_tpl = Template(settings.ROOT.joinpath(_PATH, "symbol_material.png"))
-    carp_tpl = Template(settings.ROOT.joinpath(_PATH, "carp_material.png"))
-    drum_tpl = Template(settings.ROOT.joinpath(_PATH, "drum_material.png"))
-    fight_tpl = Template(settings.ROOT.joinpath(_PATH, "fight_icon.png"))
-    prepare_tpl = Template(settings.ROOT.joinpath(_PATH, "prepare_icon.png"))
-    reward_tpl = Template(settings.ROOT.joinpath(_PATH, "reward_icon.png"))
-    back_tpl = Template(settings.ROOT.joinpath(_PATH, "back_icon.png"))
-    level_ten_tpl = Template(settings.ROOT.joinpath(_PATH, "level_ten.png"))
+    entry_tpl = Template(_PATH.joinpath("material_icon.png"))
+    wheel_tpl = Template(_PATH.joinpath("wheel_material.png"))
+    symbol_tpl = Template(_PATH.joinpath("symbol_material.png"))
+    carp_tpl = Template(_PATH.joinpath("carp_material.png"))
+    drum_tpl = Template(_PATH.joinpath("drum_material.png"))
+    fight_tpl = Template(_PATH.joinpath("fight_icon.png"))
+    prepare_tpl = Template(_PATH.joinpath("prepare_icon.png"))
+    reward_tpl = Template(_PATH.joinpath("reward_icon.png"))
+    back_tpl = Template(_PATH.joinpath("back_icon.png"))
+    level_ten_tpl = Template(_PATH.joinpath("level_ten.png"))
 
     class Config:
         arbitrary_types_allowed = True
@@ -62,8 +62,6 @@ class MaterialPage:
         while times > 0:
             logger.info("开始挑战"), click(self._elements.fight_tpl)
             time.sleep(5)  # 过度动画
-            if exists(self._elements.prepare_tpl):
-                logger.info("点击准备"), click(self._elements.prepare_tpl)
             count = 60
             while count > 0:
                 #  战斗180s 没结束就投降
@@ -75,3 +73,14 @@ class MaterialPage:
                 except TargetNotFoundError:
                     count -= 1
             times -= 1
+
+
+if __name__ == "__main__":
+    page = MaterialPage()
+    times = 10  # 改次数
+    for m_type in [1, 2, 3, 4]:  # 改类型
+        page.enter_material()
+        page.select_material(m_type=m_type)
+        page.collect_material(times=times)
+        time.sleep(2)  # 过度动画
+        page.quit_material()
