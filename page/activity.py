@@ -1,5 +1,3 @@
-import time
-
 from airtest.core.api import *
 from pydantic.main import BaseModel
 
@@ -36,5 +34,5 @@ def start_activity(times: int = 100):
         time.sleep(3), click(_elements.continue_tpl)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     start_activity(times=300)
