@@ -1,6 +1,7 @@
 import logging
 from pathlib import Path
 import loguru
+from airtest.core.android import Android
 from pydantic import Field
 from pydantic_settings import BaseSettings
 from airtest.core import api
@@ -20,4 +21,4 @@ class Settings(BaseSettings):
 settings = Settings()
 logging.getLogger("airtest").setLevel(settings.LOGLEVEL)  # airtest日志级别
 logger = loguru.logger
-api.init_device(uuid=settings.UUID)
+device: Android = api.init_device(uuid=settings.UUID)
