@@ -2,7 +2,6 @@ from airtest.core.api import *
 from pydantic.main import BaseModel
 
 from settings import settings, logger
-from airtest.core import api
 
 __all__ = [
     "spirit1_solo",
@@ -27,6 +26,7 @@ class _Elements(BaseModel):
     battle3 = Template(_PATH.joinpath("battle3.png"))
     complete3 = Template(_PATH.joinpath("complete3.png"))
     battle4 = Template(_PATH.joinpath("battle4.png"))
+    battle5 = Template(_PATH.joinpath("battle5.png"))
     reward = Template(_PATH.joinpath("reward.png"))
 
     class Config:
@@ -117,5 +117,17 @@ def spirit4(times: int = 10):
         logger.info("领取奖励"), touch(_elements.reward)
 
 
+def spirit5(times: int = 10):
+    """契灵"""
+    count = 0
+    while count < times:
+        count += 1
+        logger.info(f"第{count}次挑战契灵"), touch(_elements.battle5)
+        logger.info("开始战斗"), time.sleep(10)
+        wait(_elements.reward, timeout=60)
+        logger.info("等待奖励刷新"), time.sleep(1)
+        logger.info("领取奖励"), touch(_elements.reward)
+
+
 if __name__ == "__main__":
-    spirit4(times=50)
+    spirit2(times=20)

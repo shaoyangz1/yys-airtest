@@ -77,7 +77,7 @@ class MaterialPage:
 
 if __name__ == "__main__":
     page = MaterialPage()
-    times = 10  # 改次数
+    times = 30  # 改次数
     for m_type in [1, 2, 3, 4]:  # 改类型
         page.enter_material()
         page.select_material(m_type=m_type)
